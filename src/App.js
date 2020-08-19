@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+window.addEventListener('load', function() {
+  document.querySelector('input[type="file"]').addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+          var img = document.querySelector('img')  // $('img')[0]
+          img.onload = imageIsLoaded
+          img.src = URL.createObjectURL(this.files[0]) // set src to blob url
+      }
+  })
+})
+
+function imageIsLoaded(e) {
 }
 
-export default App;
+export default function App() {
+  return (
+    <div className="App">
+      <input type='file' />
+      <br/>
+      <br/>
+      <img alt="upload" width={800} />
+    </div>
+  )
+}
